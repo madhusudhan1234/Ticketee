@@ -21,7 +21,22 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @title = "Sublime Text 3 - Projects - Ticketee"
+  end
+
+  def edit
+    @project = Project.find(params[:id])
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    if @project.update(project_params)
+      flash[:notice] = "Project has been updated."
+      redirect_to @project
+    else
+      flash.now[:alert] = "Project has not been updated."
+      return "edit"
+    end
+
   end
 
   private
